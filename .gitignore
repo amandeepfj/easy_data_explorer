@@ -1,3 +1,5 @@
 dist*
 easy_data_explorer.egg*
 easy_data_explorer_amandeepfj.egg*
+src/easy_data_explorer_afj.egg*
+src/easy_data_explorer/__pycache__/*

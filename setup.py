@@ -3,7 +3,7 @@ import setuptools
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-VERSION = '0.0.1'
+VERSION = '0.0.4'
 DESCRIPTION = 'Easy Data Explorer'
 LONG_DESCRIPTION = 'Python library to do common data exploring tasks.'
 
@@ -20,7 +20,7 @@ setuptools.setup(
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.6",
-    install_requires=['pandas', 'numpy'],
+    install_requires=['pandas', 'numpy', 'matplotlib', 'seaborn', 'pydataset'],
     keywords=['python', 'data explore'],
     project_urls={
         "Bug Tracker": "https://github.com/amandeepfj/easy_data_explorer/issues",
@@ -29,8 +29,6 @@ setuptools.setup(
         "Development Status :: 1 - Planning",
         "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
-        "Operating System :: Unix",
-        "Operating System :: MacOS :: MacOS X",
-        "Operating System :: Microsoft :: Windows",
+        "Operating System :: OS Independent",
     ]
 )

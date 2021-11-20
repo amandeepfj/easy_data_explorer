@@ -13,3 +13,6 @@ Upload dist
 
 Install library
 + `py -m pip install easy-data-explorer-amandeepfj`
+
+Upgrade to latest version library
++ `py -m pip install easy-data-explorer-amandeepfj -U`
