@@ -4,8 +4,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+
 def add_one(number):
+    '''
+    A test function to check if all the functions here are loading correctly
+    '''
     return number + 1
+
 
 def get_categorical_and_boolean_columns_summary_statistics(df_to_process):
     '''
@@ -66,19 +71,33 @@ def get_float_and_int_columns_summary_statistics(df_to_process):
     return(df_result)
 
 
-def plot_box_plots_categorical_vs_numeric(df_to_plot, categorical_variables, numeric_variables):
+def plot_box_plots_categorical_vs_numeric(df_to_plot, categorical_variables, numeric_variables, n_max_categories_to_plot = 10):
+    '''
+    Plots box plots of categorical columns vs numeric columns.
+    Parameters:
+        df_to_plot : pandas dataframe to plot
+        categorical_variables : list of categorical variables
+        numeric_variables :  list of numeric variables
+        n_max_categories_to_plot : (default 10)max number of categories to show on plot   
+    '''
+
+    if  (categorical_variables is None) or \
+        (numeric_variables is None) or \
+        (len(categorical_variables) == 0) or \
+        (len(numeric_variables) == 0) or \
+        (n_max_categories_to_plot < 1):
+
+        print("Nothing to plot!")
+        return()
+
 
     n_plot_rows = len(categorical_variables)
     n_plot_columns = len(numeric_variables)
 
-    if (n_plot_rows == 0) or (n_plot_columns == 0):
-        print("Nothing to plot!")
-        return()
-
     f, axs = plt.subplots(n_plot_rows, n_plot_columns, 
                     figsize = (15, n_plot_rows * 5))
 
-    temp_color = '#39a8de'
+    temp_color = '#618ad5'
 
     row_index = 0
 
@@ -91,10 +110,11 @@ def plot_box_plots_categorical_vs_numeric(df_to_plot, categorical_variables, num
 
         temp_value_counts = df_to_plot[temp_categorical_var_name].value_counts()
 
-        if(len(temp_value_counts) > 10):
+        if(len(temp_value_counts) > n_max_categories_to_plot):
             col_index = 0
             for temp_numeric_var_name in numeric_variables:
-                axs[row_index][col_index].text(0.5, 0.3, "Plot skipped\nToo many categories in\n" + temp_categorical_var_name, 
+                axs[row_index][col_index].text(0.5, 0.3, 
+                        "Plot skipped\nToo many categories(" + str(len(temp_value_counts)) +") in\n" + temp_categorical_var_name, 
                                                 ha="center",  size=30)
                 col_index = col_index + 1
         else: 
@@ -123,9 +143,19 @@ def plot_box_plots_categorical_vs_numeric(df_to_plot, categorical_variables, num
     plt.show()
 
 
-def plot_frequency_plots_for_categorical_variables(df_to_plot, categorical_variables):
+def plot_frequency_plots_for_categorical_variables(df_to_plot, categorical_variables, n_max_categories_to_plot = 10):
+    '''
+    Plots frequency plots of categorical columns.
+    Parameters:
+        df_to_plot : pandas dataframe to plot
+        categorical_variables : list of categorical variables
+        n_max_categories_to_plot : (default 10)max number of categories to show on plot   
+    '''
 
-    if len(categorical_variables) == 0:
+    if  (categorical_variables is None) or \
+        (len(categorical_variables) == 0) or \
+        (n_max_categories_to_plot < 1):
+        
         print("Nothing to plot!")
         return()
 
@@ -135,7 +165,7 @@ def plot_frequency_plots_for_categorical_variables(df_to_plot, categorical_varia
     f, axs = plt.subplots(number_of_rows, number_of_columns, 
                 figsize = (15, number_of_rows * 5))
 
-    temp_color = '#39a8de'
+    temp_color = '#618ad5'
 
     row_index = 0
     col_index = 0
@@ -150,8 +180,10 @@ def plot_frequency_plots_for_categorical_variables(df_to_plot, categorical_varia
             
         temp_value_counts = df_to_plot[temp_var_name].value_counts()
 
-        if(len(temp_value_counts) > 10):
-            temp_ax_to_plot.text(0.5, 0.3, "Plot skipped\nToo many categories in\n" + temp_var_name, ha="center",  size=30)
+        if(len(temp_value_counts) > n_max_categories_to_plot):
+            temp_ax_to_plot.text(0.5, 0.3,
+                        "Plot skipped\nToo many categories(" + str(len(temp_value_counts)) +") in\n" + temp_var_name, 
+                                                ha="center",  size=30)
         else:
             temp_ax = sns.barplot(x = temp_value_counts, y= temp_value_counts.index, 
                         ax=temp_ax_to_plot,

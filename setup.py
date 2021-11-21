@@ -3,7 +3,7 @@ import setuptools
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-VERSION = '0.0.4'
+VERSION = '0.0.5'
 DESCRIPTION = 'Easy Data Explorer'
 LONG_DESCRIPTION = 'Python library to do common data exploring tasks.'
 
