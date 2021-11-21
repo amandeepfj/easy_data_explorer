@@ -16,3 +16,6 @@ Install library
 
 Upgrade to latest version library
 + `py -m pip install easy-data-explorer-amandeepfj -U`
+
+## Publicly available via `pypi`
++ Project location : https://pypi.org/project/easy-data-explorer-amandeepfj/
